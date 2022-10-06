@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>제이쿼리쿠키체크박스</title>
+
+    <style>
+        #ad_wrap{
+            width: 500px;
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            box-shadow: 0px 0px 8px #000;
+            /* display: none; */
+        }
+        #closeChk{
+            width: 20px;
+            height: 20px;
+            margin-top: 5px;
+        }
+        .popBtn{
+            background-color: black;
+            width: 500px;
+            text-align: right;
+            padding: 10px 0px;
+        }
+        label{
+            color: white;
+            margin-right: 10px;
+        }
+        .closeBtn{
+            padding: 7px 10px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="ad_wrap">
+        <img src="HIVER.png" alt="">
+        <div class="popBtn">
+            <input type="checkbox" name="closeChk" id="closeChk">
+            <label for="closeChk">오늘 하루 보지 않기</label>
+            <button class="closeBtn">닫기</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function(){ //쿠키 값(popup)이 넌이면
+            if($.cookie("popup")=="none"){
+                $("#ad_wrap").hide();
+            };
+
+            let chkBox = $("#closeChk"); //체크박스
+
+            $(".closeBtn").on("click", closePop);
+
+            function closePop(){
+                if(chkBox.is(":checked")){
+                    $.cookie("popup","none",{expires:1, path:"/"}); //쿠키저장경로
+                }
+                $("#ad_wrap").fadeOut("fast");
+            };
+            $("#ad_wrap").draggable();
+        });
+    </script>
+</body>
+</html>
